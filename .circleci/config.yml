@@ -1,0 +1,49 @@
+version: 2.1
+
+executors:
+  node:
+    docker:
+      - image: circleci/node:12.14
+
+commands:
+  say_hello:
+    description: "Simply saying hello"
+    parameters:
+      to:
+        type: string
+        default: "nobody"
+    steps:
+      - run: echo Hello there << parameters.to >>
+
+  say_goodbye:
+    description: "Simply saying goodbye"
+    parameters:
+      to:
+        type: string
+        default: "nobody"
+    steps:
+      - run: echo So long << parameters.to >>
+
+jobs:
+  say_hello:
+    executor: node
+    steps:
+      - say_hello:
+          to: Mick
+  say_goodbye:
+    executor: node
+    steps:
+      - say_goodbye:
+          to: Mick
+
+workflows:
+  testing:
+    jobs:
+      - say_hello
+      - approve_greeting:
+          type: approval
+          requires:
+            - say_hello
+      - say_goodbye:
+          requires:
+            - approve_greeting
