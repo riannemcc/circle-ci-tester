@@ -42,7 +42,7 @@ jobs:
     executor: node
     steps:
       - say_goodbye:
-          to: Mick
+          to: Rianne
 
 workflows:
   testing:
