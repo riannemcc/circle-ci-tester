@@ -6,7 +6,7 @@ executors:
       - image: circleci/node:12.14
   cypress_e2e:
     docker:
-      - image: benaud12/cypress-tester:latest
+      - image: riannemcc/cypress-tester:v1
 
 commands:
   say_hello:
@@ -32,7 +32,7 @@ jobs:
     executor: node
     steps:
       - say_hello:
-          to: Mick
+          to: Rianne
   cypress_test:
     executor: cypress_e2e
     working_directory: /e2e
